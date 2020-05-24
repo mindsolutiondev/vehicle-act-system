@@ -8749,3 +8749,5 @@ GET /api/v2/act 200 228181 - 18.139 ms
 GET /api/v1/ActNoti/ 200 348 - 11.524 ms
 DELETE /api/v2/act/delete/5eca99a8c442ce5178be699a 200 16 - 28.595 ms
 GET /api/v2/act 200 448 - 3.188 ms
+POST /api/management/activation/generator 200 92 - 56.809 ms
+POST /api/management/activation 200 69 - 44.382 ms
