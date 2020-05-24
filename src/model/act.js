@@ -2,7 +2,7 @@ import api from "../utils/api"
 
 const ActService = {
   getAllAct: () => {
-    return api.get(`api/v1/act/`)
+    return api.get(`api/management/act/`)
   },
   postAct: (data) => {
     return api.post(`api/v2/act/create`)
@@ -11,25 +11,25 @@ const ActService = {
     return api.delete(`api/v2/act/delete/${id}`)
   },
   getAct: (id) => {
-    return api.get(`api/v1/act/${id}`)
+    return api.get(`api/management/act/${id}`)
   },
   updateAct: (id, data) => {
-    return api.put(`api/v1/act/${id}`, data)
+    return api.put(`api/management/act/${id}`, data)
   },
   getActNotification: () => {
-    return api.get(`api/v1/ActNoti/`)
+    return api.get(`api/management/ActNoti/`)
   },
   getNotification: () => {
-    return api.get(`api/v1/datanotifications`)
+    return api.get(`api/management/datanotifications`)
   },
   postActType: (data) => {
-    return api.post(`api/v1/acttype`, data)
+    return api.post(`api/management/acttype`, data)
   },
   getActType: () => {
-    return api.get(`api/v1/acttype`)
+    return api.get(`api/management/acttype`)
   },
   deleteActType: (data) => {
-    return api.delete(`api/v1/acttype/${data}`)
+    return api.delete(`api/management/acttype/${data}`)
   },
   updateActGeneral: (id, data) => {
     return api.put(`api/v2/act/create/general/${id}`, data)
