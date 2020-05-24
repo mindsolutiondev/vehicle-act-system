@@ -1,7 +1,9 @@
 const actController = require('../controllers/Act')
 const authController = require('../controllers/Auth')
+const actV2Controller = require('../controllers/Actv2')
+
 module.exports = {
-  management: [
+  v1: [
     {
       methods: 'GET',
       path: '/act/',
@@ -111,6 +113,68 @@ module.exports = {
       methods: 'DELETE',
       path: '/acttype/:id',
       controller: actController.deleteActType
+    },
+  ],
+  v2: [
+    {
+      methods: 'POST',
+      path: '/act/create',
+      controller: actV2Controller.create
+    },
+    {
+      methods: 'DELETE',
+      path: '/act/delete/:id',
+      controller: actV2Controller.deleteById
+    },
+    {
+      methods: 'PUT',
+      path: '/act/create/general/:id',
+      controller: actV2Controller.updateGeneral
+    },
+    {
+      methods: 'PUT',
+      path: '/act/create/vehical-info/:id',
+      controller: actV2Controller.vehicalInfo
+    },
+    {
+      methods: 'PUT',
+      path: '/act/vehical-Wheel/:id',
+      controller: actV2Controller.vehicalWheel
+    },
+    {
+      methods: 'POST',
+      path: '/act/LogWheelDetail',
+      controller: actV2Controller.LogWheelDetail
+    },
+    {
+      methods: 'PUT',
+      path: '/act/create/other-detail/:id',
+      controller: actV2Controller.OtherDetails
+    },
+    {
+      methods: 'GET',
+      path: '/act',
+      controller: actV2Controller.getAct
+    },
+    {
+      methods: 'GET',
+      path: '/act/:id',
+      controller: actV2Controller.getAct
+    }, 
+    {
+      methods: 'GET',
+      path: '/act/step-two/:id',
+      controller: actV2Controller.getVehicleInfo
+    },
+    {
+      methods: 'GET',
+      path: '/act/step-three/wheel/:id',
+      controller: actV2Controller.getWheel
+    },
+    {
+      methods: 'GET',
+      path: '/act/step-three/note/:id',
+      controller: actV2Controller.getOtherVehicle
     }
   ]
 }

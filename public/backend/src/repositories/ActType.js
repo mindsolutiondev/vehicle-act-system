@@ -3,6 +3,6 @@ const Schema = mongoose.Schema
 const schema = new Schema({
     nameActType: String
 })
-let Act = mongoose.model('ActType', schema)
+let ActType = mongoose.model('ActType', schema)
 
-module.exports = Act
+module.exports = ActType

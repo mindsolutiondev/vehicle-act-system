@@ -8,7 +8,14 @@ const schema = new Schema({
     distance: String,
     vehicalBook:  String,
     insureDocuments:  String,
-    vehicleImg:  String
+    vehicleImg:  String,
+    carmileage: String,
+    datecarmileage: String,
+    driverName: String,
+    phone: String,
+    brands: String,
+    type: String,
+    groupcar: String,
 })
 let Act = mongoose.model('Acts', schema)
 module.exports = Act

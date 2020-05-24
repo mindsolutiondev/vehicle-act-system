@@ -10,20 +10,24 @@ const axios = require("axios")
 const isEmpty = require("lodash.isempty")
 const createwindow = require("./createwindow")
 const contextMenu = require("electron-context-menu")
-const debug = require('electron-debug')
-const url = require('url')
+const debug = require("electron-debug")
+const url = require("url")
 const { app, BrowserWindow, ipcMain } = electron
 require("dotenv").config()
 let regedit = require("regedit")
 regedit.setExternalVBSLocation("resources/regedit/vbs")
 
-debug();
+debug()
 
 // Keep a reference for dev mode
 let dev = false
 
 // Determine the mode (dev or production)
-if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
+if (
+  process.defaultApp ||
+  /[\\/]electron-prebuilt[\\/]/.test(process.execPath) ||
+  /[\\/]electron[\\/]/.test(process.execPath)
+) {
   dev = true
 }
 
@@ -32,15 +36,15 @@ function sendStatusToWindow(message) {
 }
 
 const autoUpdater = updater.autoUpdater
-autoUpdater.requestHeaders = { "Private-Token":  "Txsz-Bswy9sJkjY2zxCR" }
 autoUpdater.autoDownload = true
 
 autoUpdater.setFeedURL({
-  provider: "generic",
-  channel: "latest",
-  url: "http://gitlab.com/api/v5/projects/15160208/jobs/artifacts/master/raw/dist?job=build"
+  provider: "github",
+  repo: "vehicle-act-system",
+  owner: "mindsolutiondev",
+  private: true,
+  token: "06aca3e2556b54627487aa35def4c6b34b9959d4",
 })
-
 
 autoUpdater.logger = log
 autoUpdater.logger.transports.file.level = "info"
@@ -75,7 +79,6 @@ autoUpdater.on("update-downloaded", (ev, info) => {
     autoUpdater.quitAndInstall()
   }, 5000)
 })
-
 
 let mainWindow
 var webServer
@@ -154,7 +157,7 @@ app.on("before-quit", () => {
 
 const startApp = async (status = true) => {
   shuttingDown = false
-  await app.whenReady();
+  await app.whenReady()
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
@@ -170,24 +173,24 @@ const startApp = async (status = true) => {
   // const startUrl = isDev
   //   ? `${process.env.ELECTRON_START_URL}`
   //   : `file://${path.join(__dirname, "../build/index.html")}`
-  
-  if (dev && process.argv.indexOf('--noDevServer') === -1) {
+
+  if (dev && process.argv.indexOf("--noDevServer") === -1) {
     indexPath = url.format({
-      protocol: 'http:',
-      host: 'localhost:3000',
-      pathname: '/',
-      slashes: true
+      protocol: "http:",
+      host: "localhost:3000",
+      pathname: "/",
+      slashes: true,
     })
   } else {
     indexPath = url.format({
-      protocol: 'file:',
-      pathname: path.join(__dirname, 'dist', 'index.html'),
-      slashes: true
+      protocol: "file:",
+      pathname: path.join(__dirname, "dist", "index.html"),
+      slashes: true,
     })
   }
 
   // Load the index.html
- 
+
   mainWindow.loadURL(indexPath)
 
   menu()

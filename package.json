@@ -77,6 +77,7 @@
     "dev": "concurrently -k \"npm start\" \"wait-on http://localhost:3000 && npm run electron-dev \"",
     "electron-pack": "electron-builder -w",
     "electron-build": "npm run build && electron-builder .env",
+    "gh-publish": "npm run build && electron-builder .env -p always",
     "prod-win": "electron-packager . vehecle_act_system --platform=win32 --arch=x64 --out dist/",
     "build:css": "postcss ./src/style/tailwind.css -o ./src/style/main.css",
     "watch:css": "postcss ./src/style/tailwind.css -o ./src/style/main.css"
@@ -105,15 +106,20 @@
     "eslint": "^6.6.0",
     "wait-on": "^3.3.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindsolutiondev/vehecal_act_system.git"
+  },
   "build": {
     "appId": "com.mindsolution.app",
     "productName": "vehecal_act_system",
-    "publish": [
-      {
-        "provider": "generic",
-        "url": "http://gitlab.com"
-      }
-    ],
+    "publish": {
+      "provider": "github",
+      "owner": "mindsolutiondev",
+      "repo": "vehicle-act-system",
+      "token": "06aca3e2556b54627487aa35def4c6b34b9959d4",
+      "private": true
+    },
     "directories": {
       "buildResources": "build"
     },
