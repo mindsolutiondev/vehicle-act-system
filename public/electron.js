@@ -1,5 +1,5 @@
 const electron = require("electron")
-// const isDev = require("electron-is-dev")
+const isDev = require("electron-is-dev")
 const server = require("./backend/app")
 let path = require("path")
 const kill = require("kill-port")
@@ -170,28 +170,30 @@ const startApp = async (status = true) => {
   })
 
   mainWindow.maximize()
-  // const startUrl = isDev
-  //   ? `${process.env.ELECTRON_START_URL}`
-  //   : `file://${path.join(__dirname, "../build/index.html")}`
+  const startUrl = isDev
+    ? `${process.env.ELECTRON_START_URL}`
+    : `file://${path.join(__dirname, "../build/index.html")}`
 
-  if (dev && process.argv.indexOf("--noDevServer") === -1) {
-    indexPath = url.format({
-      protocol: "http:",
-      host: "localhost:3000",
-      pathname: "/",
-      slashes: true,
-    })
-  } else {
-    indexPath = url.format({
-      protocol: "file:",
-      pathname: path.join(__dirname, "build", "index.html"),
-      slashes: true,
-    })
-  }
+  console.log(startUrl)
+
+  // if (dev && process.argv.indexOf("--noDevServer") === -1) {
+  //   indexPath = url.format({
+  //     protocol: "http:",
+  //     host: "localhost:3000",
+  //     pathname: "/",
+  //     slashes: true,
+  //   })
+  // } else {
+  //   indexPath = url.format({
+  //     protocol: "file:",
+  //     pathname: path.join(__dirname, "build", "index.html"),
+  //     slashes: true,
+  //   })
+  // }
 
   // Load the index.html
 
-  mainWindow.loadURL(indexPath)
+  mainWindow.loadURL(startUrl)
 
   menu()
   mainWindow.on("closed", () => {
