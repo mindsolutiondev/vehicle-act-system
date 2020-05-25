@@ -12,7 +12,7 @@ const createwindow = require("./createwindow")
 const contextMenu = require("electron-context-menu")
 const debug = require("electron-debug")
 const url = require("url")
-const { app, BrowserWindow, ipcMain } = electron
+const { app, BrowserWindow, ipcMain, dialog } = electron
 require("dotenv").config()
 let regedit = require("regedit")
 regedit.setExternalVBSLocation("resources/regedit/vbs")
@@ -32,7 +32,9 @@ if (
 }
 
 function sendStatusToWindow(message) {
-  console.log(message)
+  dialog.showMessageBox(BrowserWindow, {
+    message: message,
+  })
 }
 
 const autoUpdater = updater.autoUpdater
@@ -62,6 +64,7 @@ autoUpdater.on("update-not-available", (info) => {
 autoUpdater.on("error", (err) => {
   sendStatusToWindow("Error in auto-updater. " + err)
 })
+
 autoUpdater.on("download-progress", (progressObj) => {
   let log_message = "Download speed: " + progressObj.bytesPerSecond
   log_message = log_message + " - Downloaded " + progressObj.percent + "%"

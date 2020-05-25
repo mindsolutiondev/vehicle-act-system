@@ -17,7 +17,7 @@ const LoginPage = () => {
         <Container>
           <LoginBox>
             <>
-              <div className="header">เข้าสู่ระบบ | Login</div>
+              <div className="header">เข้าสู่ระบบ</div>
               <div className="boxWrap">
                 <FormGroup>
                   <Label for="Username">ชื่อผู้ใช้งาน</Label>
