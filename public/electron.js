@@ -184,7 +184,7 @@ const startApp = async (status = true) => {
   } else {
     indexPath = url.format({
       protocol: "file:",
-      pathname: path.join(__dirname, "dist", "index.html"),
+      pathname: path.join(__dirname, "build", "index.html"),
       slashes: true,
     })
   }
