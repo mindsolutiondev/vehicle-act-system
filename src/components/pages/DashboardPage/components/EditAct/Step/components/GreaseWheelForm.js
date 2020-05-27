@@ -26,7 +26,7 @@ const GreaseWheelForm = (props) => {
       <Form form={form} layout="vertical">
         <Form.Item label="หมายเลขไมล์ที่เปลี่ยนครั้งล่าสุด">
           <Input
-            value={_get(props.GreaseWheel, "latestMileNumber", "-")}
+            defaultValue={_get(props.GreaseWheel, "latestMileNumber", "-")}
             onChange={(e) =>
               _onSave("latestMileNumber", "greaseWheelOil", e.target.value)
             }
@@ -46,7 +46,7 @@ const GreaseWheelForm = (props) => {
         </Form.Item>
         <Form.Item label="หมายเลขไมล์ที่เปลี่ยนครั้งถัดไป">
           <Input
-            value={_get(props.GreaseWheel, "nextlatestMileNumber", "-")}
+            defaultValue={_get(props.GreaseWheel, "nextlatestMileNumber", "-")}
             onChange={(e) =>
               _onSave("nextlatestMileNumber", "greaseWheelOil", e.target.value)
             }
@@ -54,7 +54,7 @@ const GreaseWheelForm = (props) => {
         </Form.Item>
         <Form.Item label="ชนิดน้ำมัน">
           <Input
-            value={_get(props.GreaseWheel, "typeOil", "-")}
+            defaultValue={_get(props.GreaseWheel, "typeOil", "-")}
             onChange={(e) =>
               _onSave("typeOil", "greaseWheelOil", e.target.value)
             }
@@ -63,7 +63,7 @@ const GreaseWheelForm = (props) => {
 
         <Form.Item label="จำนวน">
           <Input
-            value={_get(props.GreaseWheel, "quantity", "-")}
+            defaultValue={_get(props.GreaseWheel, "quantity", "-")}
             onChange={(e) =>
               _onSave("quantity", "greaseWheelOil", e.target.value)
             }
@@ -72,7 +72,7 @@ const GreaseWheelForm = (props) => {
 
         <Form.Item label="ระยะทางคงเหลือ">
           <Input
-            value={_get(props.GreaseWheel, "remainingDistance", "-")}
+            defaultValue={_get(props.GreaseWheel, "remainingDistance", "-")}
             onChange={(e) =>
               _onSave("remainingDistance", "greaseWheelOil", e.target.value)
             }

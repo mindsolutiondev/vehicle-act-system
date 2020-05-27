@@ -91,7 +91,7 @@ let createwin
 contextMenu({ showInspectElement: false })
 
 app.on("ready", async () => {
-  app.server = server
+  // app.server = server
   autoUpdater.checkForUpdatesAndNotify()
 
   await regedit.createKey(

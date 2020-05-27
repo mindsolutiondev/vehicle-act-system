@@ -1,7 +1,7 @@
-import React, { useState, useEffect, Fragment }  from 'react'
-import styled from 'styled-components'
-import { CloudUploadOutlined } from '@ant-design/icons';
-import { List, Avatar } from 'antd';
+import React, { useState, useEffect, Fragment } from "react"
+import styled from "styled-components"
+import { CloudUploadOutlined } from "@ant-design/icons"
+import { List, Avatar } from "antd"
 
 const ContainerWrapper = styled.div`
   cursor: pointer;
@@ -16,38 +16,33 @@ const ContainerWrapper = styled.div`
 
   span {
     font-weight: 400;
-    font-size: '0.8125rem';
+    font-size: "0.8125rem";
   }
 `
-const Upload = ({
-  imageUrl,
-  onChange,
-  title,
-  trigger,
-  preview
-}) => {
-  const [descriptionImg, setDescriptionImg] = useState('')
-  useEffect(() => {
-    const triggerDelUpload = () => {
-      if(trigger) {
-        setDescriptionImg('')
-      } else console.log('status =',trigger)
-    }    
+const Upload = ({ imageUrl, onChange, title, trigger, preview }) => {
+  const [descriptionImg, setDescriptionImg] = useState("")
 
-
-    if(preview === undefined ) {
-      console.log("1",preview)
-    } else {
-      setDescriptionImg(preview)
-      setTimeout(() => {
-        onChange(title, preview)
-      },1000)
+  useEffect(async () => {
+    const setDefaultImage = async () => {
+      if (preview !== undefined) {
+        console.log("----->", preview)
+        await setDescriptionImg(preview)
+        await onChange(title, preview)
+      } else {
+        await onChange("", "")
+      }
     }
 
-    triggerDelUpload()
-  },[trigger,title, preview])
+    const triggerDelUpload = () => {
+      if (trigger) {
+        setDescriptionImg("")
+      } else console.log("status =", trigger)
+    }
+    await setDefaultImage()
+    await triggerDelUpload()
+  }, [trigger, title, preview])
 
-  const _onSelectFile = e => {
+  const _onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader()
       const filename = e.target.files[0].name
@@ -61,53 +56,47 @@ const Upload = ({
   }
   return (
     <ContainerWrapper>
-      {
-        descriptionImg === '' ? (
-          <Fragment>
-            <CloudUploadOutlined />
-            คลิกเพื่ออัพโหลด
-            <span>ไฟล์ที่รองรับ: รูปภาพทุกชนิด</span>
-            <input
-              key={Date.now()}
-              type="file"
-              style={{ 
-                cursor: 'pointer',
-                opacity: 0,
-                width: '100%',
-                padding: '50px',
-                position: 'absolute',
-                top: '18px'
-              }}
-              accept="image/*"
-              onChange={_onSelectFile}
-            />
-          </Fragment>
-        ) : (
+      {descriptionImg === "" ? (
         <Fragment>
-          <Avatar size={100} src={descriptionImg} />
+          <CloudUploadOutlined />
+          คลิกเพื่ออัพโหลด
+          <span>ไฟล์ที่รองรับ: รูปภาพทุกชนิด</span>
           <input
             key={Date.now()}
             type="file"
-            style={{ 
-              cursor: 'pointer',
+            style={{
+              cursor: "pointer",
               opacity: 0,
-              width: '100%',
-              padding: '50px',
-              position: 'absolute',
-              top: '18px'
+              width: "100%",
+              padding: "50px",
+              position: "absolute",
+              top: "18px",
             }}
             accept="image/*"
             onChange={_onSelectFile}
           />
         </Fragment>
-        )
-      }
+      ) : (
+        <Fragment>
+          <Avatar size={100} src={descriptionImg} />
+          <input
+            key={Date.now()}
+            type="file"
+            style={{
+              cursor: "pointer",
+              opacity: 0,
+              width: "100%",
+              padding: "50px",
+              position: "absolute",
+              top: "18px",
+            }}
+            accept="image/*"
+            onChange={_onSelectFile}
+          />
+        </Fragment>
+      )}
     </ContainerWrapper>
-  );
+  )
 }
-
-// Upload.defaultProps = {
-//   preview: 'no data'
-// }
 
 export default Upload

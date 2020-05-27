@@ -12,7 +12,6 @@ import useGetOneVehicle from "../../../hooks/useGetOneVehicle"
 const { TabPane } = Tabs
 
 const EngineOilInformation = ({ actId, toNextStep, toPrevStep }) => {
-  const [loading, setLoading] = useState(false)
   let { show } = useGetOneVehicle({ actId, step: 2 })
 
   const callback = (key) => {}
@@ -48,13 +47,10 @@ const EngineOilInformation = ({ actId, toNextStep, toPrevStep }) => {
     <div>
       <Divider orientation="left">ข้อมูลตัวรถ</Divider>
 
-      {loading ? (
-        <Loading />
-      ) : (
-        <Tabs defaultActiveKey="0" onChange={callback}>
-          {renderTabPane}
-        </Tabs>
-      )}
+      <Tabs defaultActiveKey="0" onChange={callback}>
+        {renderTabPane}
+      </Tabs>
+
       <Footer
         okText="ถัดไป"
         cancelText="ย้อนกลับ"

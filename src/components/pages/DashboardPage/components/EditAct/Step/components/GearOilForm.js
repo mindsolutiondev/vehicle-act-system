@@ -27,7 +27,7 @@ const GearOilForm = (props) => {
       <Form form={form} layout="vertical">
         <Form.Item label="หมายเลขไมล์ที่เปลี่ยนครั้งล่าสุด">
           <Input
-            value={_get(props.GearOil, "latestMileNumber", "-")}
+            defaultValue={_get(props.GearOil, "latestMileNumber", "-")}
             onChange={(e) =>
               _onSave("latestMileNumber", "gearOil", e.target.value)
             }
@@ -47,7 +47,7 @@ const GearOilForm = (props) => {
         </Form.Item>
         <Form.Item label="หมายเลขไมล์ที่เปลี่ยนครั้งถัดไป">
           <Input
-            value={_get(props.GearOil, "nextlatestMileNumber", "-")}
+            defaultValue={_get(props.GearOil, "nextlatestMileNumber", "-")}
             onChange={(e) =>
               _onSave("nextlatestMileNumber", "gearOil", e.target.value)
             }
@@ -55,21 +55,21 @@ const GearOilForm = (props) => {
         </Form.Item>
         <Form.Item label="ชนิดน้ำมัน">
           <Input
-            value={_get(props.GearOil, "typeOil", "-")}
+            defaultValue={_get(props.GearOil, "typeOil", "-")}
             onChange={(e) => _onSave("typeOil", "gearOil", e.target.value)}
           />
         </Form.Item>
 
         <Form.Item label="จำนวน">
           <Input
-            value={_get(props.GearOil, "quantity", "-")}
+            defaultValue={_get(props.GearOil, "quantity", "-")}
             onChange={(e) => _onSave("quantity", "gearOil", e.target.value)}
           />
         </Form.Item>
 
         <Form.Item label="ระยะทางคงเหลือ">
           <Input
-            value={_get(props.GearOil, "remainingDistance", "-")}
+            defaultValue={_get(props.GearOil, "remainingDistance", "-")}
             onChange={(e) =>
               _onSave("remainingDistance", "gearOil", e.target.value)
             }
