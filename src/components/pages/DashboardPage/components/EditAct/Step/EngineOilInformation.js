@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Tabs, Divider } from "antd"
 import Footer from "../../../../../elements/Footer"
 
@@ -19,15 +19,19 @@ const { TabPane } = Tabs
 const EngineOilInformation = ({ toNextStep, actid, toPrevStep }) => {
   const [engineMock, setEngineMock] = useState(engine)
   const [loadings, setLoading] = useState(false)
-  let { show, loading } = useGetOneVehicle({ actId: actid, step: 2 })
+  let { show, loading } = useGetOneVehicle({
+    actId: actid,
+    step: 2,
+  })
+
+  useEffect(() => {
+    setEngineMock(show)
+  }, [loading])
 
   const _onSubmit = async () => {
     try {
       setLoading(true)
-      await ActService.updateActStepTwo(
-        localStorage.getItem("actId"),
-        engineMock
-      )
+      await ActService.updateActStepTwo(actid, engineMock)
       toNextStep()
       setLoading(false)
     } catch (error) {

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, Fragment } from "react"
+import React, { useState, useEffect, useRef, useCallback } from "react"
 import styled from "styled-components"
 import { CloudUploadOutlined } from "@ant-design/icons"
-import { List, Avatar } from "antd"
+import { Avatar } from "antd"
 
 const ContainerWrapper = styled.div`
   cursor: pointer;
@@ -19,81 +19,84 @@ const ContainerWrapper = styled.div`
     font-size: "0.8125rem";
   }
 `
-const Upload = ({ imageUrl, onChange, title, trigger, preview }) => {
-  const [descriptionImg, setDescriptionImg] = useState("")
+const Upload = ({ loading, onChange, title, trigger, preview }) => {
+  const [descriptionImg, setDescriptionImg] = useState(null)
+  const [loadingUpload, setLoadingUpload] = useState(false)
+  const inputFile = useRef(null)
 
-  useEffect(async () => {
+  useEffect(() => {
     const setDefaultImage = async () => {
       if (preview !== undefined) {
-        console.log("----->", preview)
         await setDescriptionImg(preview)
         await onChange(title, preview)
       } else {
         await onChange("", "")
       }
     }
-
-    const triggerDelUpload = () => {
-      if (trigger) {
-        setDescriptionImg("")
-      } else console.log("status =", trigger)
-    }
-    await setDefaultImage()
-    await triggerDelUpload()
+    setDefaultImage()
   }, [trigger, title, preview])
 
-  const _onSelectFile = (e) => {
+  const _onSelectFile = useCallback((e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader()
-      const filename = e.target.files[0].name
-      reader.onloadend = () => {
-        setDescriptionImg(reader.result)
-        onChange(title, reader.result)
+      // const filename = e.target.files[0].name
+      reader.onloadend = async () => {
+        setLoadingUpload(true)
+        await setDescriptionImg(reader.result)
+        await onChange(title, reader.result)
+        setLoadingUpload(false)
       }
 
       reader.readAsDataURL(e.target.files[0])
     }
-  }
+  }, [])
+
   return (
     <ContainerWrapper>
-      {descriptionImg === "" ? (
-        <Fragment>
-          <CloudUploadOutlined />
-          คลิกเพื่ออัพโหลด
-          <span>ไฟล์ที่รองรับ: รูปภาพทุกชนิด</span>
-          <input
-            key={Date.now()}
-            type="file"
-            style={{
-              cursor: "pointer",
-              opacity: 0,
-              width: "100%",
-              padding: "50px",
-              position: "absolute",
-              top: "18px",
-            }}
-            accept="image/*"
-            onChange={_onSelectFile}
-          />
-        </Fragment>
+      {!loading ? (
+        descriptionImg === "" || descriptionImg === null ? (
+          <>
+            <CloudUploadOutlined />
+            คลิกเพื่ออัพโหลด
+            <span>ไฟล์ที่รองรับ: รูปภาพทุกชนิด</span>
+            <input
+              key={Date.now()}
+              type="file"
+              style={{
+                cursor: "pointer",
+                opacity: 0,
+                width: "100%",
+                padding: "50px",
+                position: "absolute",
+                top: "18px",
+              }}
+              ref={inputFile}
+              accept="image/*"
+              onChange={_onSelectFile}
+            />
+          </>
+        ) : (
+          <>
+            <Avatar size={100} src={descriptionImg} />
+            <input
+              key={Date.now()}
+              type="file"
+              style={{
+                cursor: "pointer",
+                opacity: 0,
+                width: "100%",
+                padding: "50px",
+                position: "absolute",
+                top: "18px",
+              }}
+              ref={inputFile}
+              accept="image/*"
+              onChange={_onSelectFile}
+            />
+          </>
+        )
       ) : (
-        <Fragment>
-          <Avatar size={100} src={descriptionImg} />
-          <input
-            key={Date.now()}
-            type="file"
-            style={{
-              cursor: "pointer",
-              opacity: 0,
-              width: "100%",
-              padding: "50px",
-              position: "absolute",
-              top: "18px",
-            }}
-            accept="image/*"
-            onChange={_onSelectFile}
-          />
-        </Fragment>
+        <>Uploaded ...</>
       )}
     </ContainerWrapper>
   )

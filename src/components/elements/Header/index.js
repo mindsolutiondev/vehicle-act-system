@@ -1,7 +1,8 @@
+import { Col, Container, Row } from "reactstrap"
+
 import React from "react"
+import { Typography } from "antd"
 import styled from "styled-components"
-import { Container, Row, Col } from "reactstrap"
-import { white } from "ansi-colors"
 
 const Contain = styled.div`
   width: 100%;
@@ -11,29 +12,30 @@ const Contain = styled.div`
   justify-content: space-between;
 
   .fix {
-    width: 100%
+    width: 100%;
 
     .plusbutton {
       display: flex;
       justify-content: flex-end;
     }
   }
-  
 `
 
 const Header = ({ children, name }) => {
-  return(
+  return (
     <Contain>
-        <Row className="fix">
-          <Col xs="11">
-            <h3><b>{name}</b></h3>
-          </Col>
-          <Col xs="1" className="plusbutton">
-            {children}
-          </Col>
-        </Row>
+      <Row className="fix">
+        <Col xs="11">
+          <Typography.Title level={2}>
+            <b>{name}</b>
+          </Typography.Title>
+        </Col>
+        <Col xs="1" className="plusbutton">
+          {children}
+        </Col>
+      </Row>
     </Contain>
   )
 }
 
-export default Header 
+export default Header

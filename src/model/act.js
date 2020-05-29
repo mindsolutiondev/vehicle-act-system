@@ -19,8 +19,9 @@ const ActService = {
   getActNotification: () => {
     return api.get(`api/management/ActNoti/`)
   },
-  getNotification: () => {
-    return api.get(`api/management/datanotifications`)
+  getNotification: (data) => {
+    let queryString = data.length !== 0 ? `?filter=${data}` : ``
+    return api.get(`api/management/datanotifications${queryString}`)
   },
   postActType: (data) => {
     return api.post(`api/management/acttype`, data)
@@ -43,8 +44,9 @@ const ActService = {
   updateOtherDetailStepThree: (id, data) => {
     return api.put(`api/v2/act/create/other-detail/${id}`, data)
   },
-  getVehicle: () => {
-    return api.get(`api/v2/act`)
+  getVehicle: (data) => {
+    let queryString = data.length !== 0 ? `?filter=${data}` : ``
+    return api.get(`api/v2/act${queryString}`)
   },
   getVehicleById: (id) => {
     return api.get(`api/v2/act/${id}`)
@@ -59,6 +61,9 @@ const ActService = {
   },
   getVehicleStepThree: (id) => {
     return api.get(`api/v2/act/step-three/note/${id}`)
+  },
+  uploadImages: (actid, file) => {
+    return api.put(`api/v2/act/upload-image/${actid}`, file)
   },
 }
 

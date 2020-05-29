@@ -9,6 +9,8 @@ const getAct = require('./getAct')
 const getVehicleInfo = require('./getVehicleInfo')
 const getWheel = require('./getWheel')
 const getOtherVehicle = require('./getOtherVehicle')
+const uploadImage = require('./uploadImage')
+
 module.exports = {
   createAct,
   deleteAct,
@@ -20,5 +22,6 @@ module.exports = {
   getAct,
   getVehicleInfo,
   getWheel,
-  getOtherVehicle
+  getOtherVehicle,
+  uploadImage
 }

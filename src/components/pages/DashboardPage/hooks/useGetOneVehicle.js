@@ -8,7 +8,6 @@ const useGetOneVehicle = ({ actId, step, other }) => {
   const [dataArray, setDataArray] = useState([])
   const [loading, setLoading] = useState(false)
   const [refetch, setRefetch] = useState(false)
-
   const renderVehicle = async () => {
     if ([1, 2, 3].includes(step)) {
       if (step === 1) {

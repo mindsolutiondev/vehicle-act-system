@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react"
-import { Form, Input, Row, Col, DatePicker, Divider, Select } from "antd"
-import moment from "moment"
-import _get from "lodash.get"
-import { typecar } from "../../../../../../constants/typecar"
-import Footer from "../../../../../elements/Footer"
+import { Col, DatePicker, Divider, Form, Input, Row, Select } from "antd"
+import React, { useEffect, useState } from "react"
+
 import ActService from "../../../../../../model/act"
+import Footer from "../../../../../elements/Footer"
+import _get from "lodash.get"
+import getDateFormat from "../../../../../../utils/getDateFormat"
+import moment from "moment"
+import { typecar } from "../../../../../../constants/typecar"
 import useGetOneVehicle from "../../../hooks/useGetOneVehicle"
 
 const { Option } = Select
@@ -29,46 +31,29 @@ const BasicInformation = (props) => {
     form.setFieldsValue({ vehicleType: _get(show, "vehicleType", "-") })
   }, [show])
 
-  const [triggerUpload, setTriggerUpload] = useState(false)
-  const [, setLoading] = useState(false)
-
-  const [fileBlob, setFileBlob] = useState({
-    vehicalBook: "",
-    insureDocuments: "",
-    vehicleImg: "",
-  })
-
+  const [loadings, setLoadings] = useState(false)
   const onFinish = async (values) => {
-    // setLoading(true)
-    // try {
-    let dataInformation = {
-      ...values,
-      ...fileBlob,
-      actExpireDate: values.actExpireDate.format("YYYY-MM-DD"),
-      insureExpireDate: values.insureExpireDate.format("YYYY-MM-DD"),
-      datecarmileage: values.datecarmileage.format("YYYY-MM-DD"),
+    setLoadings(true)
+    try {
+      let dataInformation = {
+        ...values,
+        actExpireDate: values.actExpireDate.format("YYYY-MM-DD"),
+        insureExpireDate: values.insureExpireDate.format("YYYY-MM-DD"),
+        datecarmileage: values.datecarmileage.format("YYYY-MM-DD"),
+      }
+
+      await ActService.updateActGeneral(actid, dataInformation)
+      // setTriggerUpload(true)
+      setLoadings(true)
+      toNextStep()
+    } catch (err) {
+      setLoadings(false)
+      new Notification("แจ้งเตือน !", {
+        body: `เพิ่มข้อมูลไม่สำเร็จ เกิดปัญหาบางประการดังนี้ ${err.message}`,
+      })
+      // setTriggerUpload(true)
+      form.resetFields()
     }
-    console.log(dataInformation)
-    // await ActService.updateActGeneral(
-    //   localStorage.getItem("actId"),
-    //   dataInformation
-    // )
-    //   setTriggerUpload(true)
-    //   setLoading(true)
-    //   toNextStep()
-    // } catch (err) {
-    //   setLoading(false)
-    //   new Notification("แจ้งเตือน !", {
-    //     body: "เพิ่มข้อมูลไม่สำเร็จ เกิดปัญหาบางประการ",
-    //   })
-    //   setTriggerUpload(true)
-    //   form.resetFields()
-    //   setFileBlob({
-    //     vehicalBook: "",
-    //     insureDocuments: "",
-    //     vehicleImg: "",
-    //   })
-    // }
   }
 
   const renderTypeVehecal = (data) => {
@@ -79,14 +64,20 @@ const BasicInformation = (props) => {
     ))
   }
 
-  const _onUpload = (name, file) => {
-    setFileBlob({ ...fileBlob, [name]: file })
+  const _onUpload = async (name, file) => {
+    try {
+      await ActService.uploadImages(actid, { [name]: file })
+    } catch (err) {
+      new Notification("แจ้งเตือน !", {
+        body: `อัพโหลดรูปภาพไม่สำเร็จ เกิดปัญหาบางประการดังนี้ ${err.message}`,
+      })
+    }
   }
 
   return (
     <div>
       <Divider orientation="left">ข้อมูลทั่วไป</Divider>
-      {loading ? (
+      {loading || loadings ? (
         <>Loading ...</>
       ) : (
         <Form
@@ -119,10 +110,13 @@ const BasicInformation = (props) => {
                 name="actExpireDate"
                 label="วันที่หมดพ.ร.บ"
                 rules={[{ required: true, message: "กรุณาวันที่หมดพ.ร.บ" }]}
-                initialValue={moment(_get(show, "actExpireDate"))}
+                initialValue={getDateFormat(_get(show, "actExpireDate"))}
               >
                 <DatePicker
-                  defaultPickerValue={moment(_get(show, "actExpireDate"))}
+                  defaultPickerValue={getDateFormat(
+                    _get(show, "actExpireDate")
+                  )}
+                  format="YYYY-MM-DD"
                   placeholder="กรุณาวันที่หมดพ.ร.บ"
                   style={{ width: "100%" }}
                 />
@@ -135,10 +129,10 @@ const BasicInformation = (props) => {
                 name="insureExpireDate"
                 label="วันที่หมดประกัน"
                 rules={[{ required: true, message: "กรุณาวันที่หมดพ.ร.บ" }]}
-                initialValue={moment(_get(show, "insureExpireDate"))}
+                initialValue={getDateFormat(_get(show, "insureExpireDate"))}
               >
                 <DatePicker
-                  defaultValue={moment(_get(show, "insureExpireDate"))}
+                  defaultValue={getDateFormat(_get(show, "insureExpireDate"))}
                   placeholder="กรุณาวันที่หมดพ.ร.บ"
                   style={{ width: "100%" }}
                 />
@@ -163,10 +157,10 @@ const BasicInformation = (props) => {
                     message: "กรุณากรอกวันที่ ณ หมายเลขไมล์ปัจจุบัน",
                   },
                 ]}
-                initialValue={moment(_get(show, "datecarmileage"))}
+                initialValue={getDateFormat(_get(show, "datecarmileage"))}
               >
                 <DatePicker
-                  value={moment(_get(show, "datecarmileage"))}
+                  value={getDateFormat(_get(show, "datecarmileage"))}
                   placeholder="กรุณากรอกวันที่ ณ หมายเลขไมล์ปัจจุบัน"
                   style={{ width: "100%" }}
                 />
@@ -234,31 +228,22 @@ const BasicInformation = (props) => {
           <Form.Item label="เล่มรถ">
             <Upload
               preview={_get(show, "vehicalBook")}
-              onChange={(title, images) => {
-                _onUpload(title, images)
-              }}
+              onChange={_onUpload}
               title="vehicalBook"
-              trigger={triggerUpload}
             />
           </Form.Item>
           <Form.Item label="เอกสารประกันภัย">
             <Upload
               preview={_get(show, "insureDocuments")}
-              onChange={(title, images) => {
-                _onUpload(title, images)
-              }}
+              onChange={_onUpload}
               title="insureDocuments"
-              trigger={triggerUpload}
             />
           </Form.Item>
           <Form.Item label="รูปถ่ายรถยนต์">
             <Upload
               preview={_get(show, "vehicleImg")}
-              onChange={(title, images) => {
-                _onUpload(title, images)
-              }}
+              onChange={_onUpload}
               title="vehicleImg"
-              trigger={triggerUpload}
             />
           </Form.Item>
 

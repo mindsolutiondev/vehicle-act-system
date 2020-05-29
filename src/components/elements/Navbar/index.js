@@ -1,15 +1,17 @@
-import React, { useState } from "react"
-import { withRouter } from "react-router-dom"
-import Loadable from "react-loadable"
-import styled from "styled-components"
 import { Layout, Tooltip } from "antd"
 import {
   LogoutOutlined,
   NotificationOutlined,
   SettingOutlined,
 } from "@ant-design/icons"
-import Popover from "../Popover"
+import React, { useState } from "react"
+
+import Loadable from "react-loadable"
 import Menu from "./components/ListMenu"
+import Popover from "../Popover"
+import styled from "styled-components"
+import { withRouter } from "react-router-dom"
+
 const { Header } = Layout
 
 const ListNotification = Loadable({
@@ -48,14 +50,8 @@ const Drawers = Loadable({
 })
 
 const Navbar = (props) => {
-  let toggleVisible = true
+  // let toggleVisible = true
   const [showDrawer, setShowDrawer] = useState(false)
-  const [settingvisible, setSettingVisible] = useState(false)
-
-  const setSettingToggle = () => {
-    toggleVisible = !toggleVisible
-    setSettingVisible(toggleVisible)
-  }
   const _handleOpenDrawer = () => {
     setShowDrawer(true)
   }
@@ -76,7 +72,7 @@ const Navbar = (props) => {
           trigger="hover"
           content={
             <>
-              <Menu setPopOver={setSettingVisible} />
+              <Menu />
             </>
           }
         >

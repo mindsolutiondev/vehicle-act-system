@@ -26,3 +26,7 @@
   overflow-y: scroll;
   height: 274px;
 }
+
+.ant-drawer-body {
+  overflow: hidden;
+}

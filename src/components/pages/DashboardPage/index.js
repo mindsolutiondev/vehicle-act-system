@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react"
-import Loadable from "react-loadable"
-import { PlusOutlined } from "@ant-design/icons"
-import { Button, Tooltip, Modal } from "antd"
+import { Button, Modal, Popover, Tooltip } from "antd"
+import { DeleteContext, StepContext } from "../../../constants/context"
+import { FilterTwoTone, PlusOutlined, ReloadOutlined } from "@ant-design/icons"
+import React, { useEffect, useState } from "react"
+
 import ActService from "../../../model/act"
+import Checkable from "../../elements/checkable"
+import Loadable from "react-loadable"
 import Loading from "../../elements/Loading"
 import get from "lodash.get"
-import { StepContext, DeleteContext } from "../../../constants/context"
-import useGetVehicle from "./hooks/useGetVehicle"
 import useDisplayNotification from "./hooks/useDisplayNotification"
+import useGetVehicle from "./hooks/useGetVehicle"
 
 const ListTable = Loadable({
   loader: () =>
@@ -66,12 +68,12 @@ const ListNotification = Loadable({
 })
 
 const DashboardPage = () => {
-  let { getVehicle, setRefetch, loading } = useGetVehicle()
+  let { getVehicle, setRefetch, loading, setFilter } = useGetVehicle()
   const [step, setStep] = useState(0)
   const [showModal, setShowModal] = useState(false)
   const [showDrawer, setShowDrawer] = useState(false)
 
-  let getNoti = useDisplayNotification({ initials: setShowDrawer })
+  useDisplayNotification({ initials: setShowDrawer })
 
   const _handleShowModel = async () => {
     setShowModal(!showModal)
@@ -82,10 +84,6 @@ const DashboardPage = () => {
 
   const _handleCloseModal = async () => {
     setShowModal(false)
-  }
-
-  const _handleOpenDrawer = () => {
-    setShowDrawer(true)
   }
 
   const _handleCloseDrawer = () => {
@@ -107,6 +105,12 @@ const DashboardPage = () => {
     })
   }
 
+  const content = (
+    <div>
+      <Checkable filter={setFilter} />
+    </div>
+  )
+
   useEffect(() => {
     setStep(0)
   }, [])
@@ -115,11 +119,37 @@ const DashboardPage = () => {
     <Template>
       <Boxed>
         <Header name="จัดการข้อมูลทะเบียนรถ">
+          <Popover
+            placement="left"
+            title="กรองข้อมูลตามสถานะ"
+            content={content}
+          >
+            <Button
+              style={{ cursor: "default" }}
+              type="dashed"
+              shape="circle"
+              size="large"
+            >
+              <FilterTwoTone true style={{ marginBottom: "6px" }} />
+            </Button>
+          </Popover>
+          <Tooltip title="รีโหลดข้อมูล">
+            <Button
+              type="dashed"
+              shape="circle"
+              size="large"
+              className="tw-ml-4"
+              onClick={() => setRefetch((prev) => !prev)}
+            >
+              <ReloadOutlined true style={{ marginBottom: "6px" }} />
+            </Button>
+          </Tooltip>
           <Tooltip title="เพิ่มข้อมูลทะเบียนรถ">
             <Button
               type="primary"
               shape="circle"
               size="large"
+              className="tw-ml-4"
               onClick={() => _handleShowModel()}
             >
               <PlusOutlined style={{ marginBottom: "6px" }} />
@@ -138,7 +168,7 @@ const DashboardPage = () => {
             destroyOnClose={true}
             title="เพิ่มข้อมูลทะเบียน"
             visible={showModal}
-            footer={true}
+            footer={false}
             closeIcon={<div onClick={confirmToClose}>x</div>}
           >
             <AddAct
@@ -148,7 +178,11 @@ const DashboardPage = () => {
           </AddActModal>
         </StepContext.Provider>
 
-        <Drawers visible={showDrawer} close={_handleCloseDrawer}>
+        <Drawers
+          visible={showDrawer}
+          close={_handleCloseDrawer}
+          style={{ overflowY: "hidden" }}
+        >
           <ListNotification />
         </Drawers>
       </Boxed>
