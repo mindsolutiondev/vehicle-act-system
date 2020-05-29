@@ -32,9 +32,7 @@ if (
 }
 
 function sendStatusToWindow(message) {
-  dialog.showMessageBox(BrowserWindow, {
-    message: message,
-  })
+  console.log(message)
 }
 
 const autoUpdater = updater.autoUpdater
@@ -176,23 +174,6 @@ const startApp = async (status = true) => {
   const startUrl = isDev
     ? `${process.env.ELECTRON_START_URL}`
     : `file://${path.join(__dirname, "../build/index.html")}`
-
-  console.log(startUrl)
-
-  // if (dev && process.argv.indexOf("--noDevServer") === -1) {
-  //   indexPath = url.format({
-  //     protocol: "http:",
-  //     host: "localhost:3000",
-  //     pathname: "/",
-  //     slashes: true,
-  //   })
-  // } else {
-  //   indexPath = url.format({
-  //     protocol: "file:",
-  //     pathname: path.join(__dirname, "build", "index.html"),
-  //     slashes: true,
-  //   })
-  // }
 
   // Load the index.html
 
