@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from "react"
 
 import BasicInformation from "./Step/BasicInformation"
@@ -8,17 +7,6 @@ import OtherInformation from "./Step/OtherInformation"
 import { StepContext } from "../../../../../constants/context"
 import { Steps } from "antd"
 import useGetCarType from "../../hooks/useGetCarType"
-=======
-import React, { useState, useEffect, useContext } from "react"
-import { Steps } from "antd"
-
-import BasicInformation from "./Step/BasicInformation"
-import EngineOilInformation from "./Step/EngineOilInformation"
-import OtherInformation from "./Step/OtherInformation"
-
-import Loadable from "react-loadable"
-import { StepContext } from "../../../../../constants/context"
->>>>>>> d26ffde2e6a9bdbedd33f34a586d22c11153b0b8
 
 const { Step } = Steps
 

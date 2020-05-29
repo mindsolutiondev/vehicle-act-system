@@ -10877,3 +10877,18 @@ GET /api/v2/act 304  - 10.846 ms
 GET /api/v2/act/5ed127b8159fff43ac732553 304  - 4.670 ms
 =======
 >>>>>>> d26ffde2e6a9bdbedd33f34a586d22c11153b0b8
+POST /api/management/chkaccount 200 313 - 22.796 ms
+GET /api/v2/act 304  - 28.524 ms
+GET /api/management/ActNoti/ 304  - 35.003 ms
+DELETE /api/v2/act/delete/5ed127b8159fff43ac732553 200 16 - 22.830 ms
+GET /api/v2/act 200 114194 - 7.018 ms
+DELETE /api/v2/act/delete/5ed125b0159fff43ac7324aa 200 16 - 15.457 ms
+GET /api/v2/act 200 113890 - 5.747 ms
+GET /api/v2/act?filter=7%20Day 304  - 5.548 ms
+GET /api/v2/act 304  - 6.195 ms
+GET /api/v2/act?filter=Expired 200 1372 - 6.683 ms
+GET /api/v2/act 304  - 9.902 ms
+GET /api/v2/act?filter=15%20Day 304  - 6.015 ms
+GET /api/v2/act 304  - 9.389 ms
+GET /api/v2/act?filter=Normal 304  - 8.084 ms
+GET /api/v2/act 304  - 6.381 ms
