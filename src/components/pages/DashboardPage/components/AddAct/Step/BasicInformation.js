@@ -9,7 +9,11 @@ import { typecar } from "../../../../../../constants/typecar"
 const { Option } = Select
 
 const BasicInformation = (props) => {
+<<<<<<< HEAD
   const { toNextStep, Upload, getCarType, loadingCarType } = props
+=======
+  const { toNextStep, Upload } = props
+>>>>>>> d26ffde2e6a9bdbedd33f34a586d22c11153b0b8
   const [loading, setLoading] = useState(false)
 
   const [form] = Form.useForm()

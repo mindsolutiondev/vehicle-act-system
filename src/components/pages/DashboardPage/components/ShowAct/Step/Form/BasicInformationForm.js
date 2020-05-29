@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { Card, Col, Divider, Empty, Form, Input, Row } from "antd"
 
 import React from "react"
+=======
+import React from "react"
+import { Form, Input, Row, Col, Card, Divider } from "antd"
+>>>>>>> d26ffde2e6a9bdbedd33f34a586d22c11153b0b8
 import _get from "lodash.get"
 import useGetOneVehicle from "../../../../hooks/useGetOneVehicle"
 

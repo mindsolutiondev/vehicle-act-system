@@ -10552,6 +10552,7 @@ GET /api/v2/act 304  - 4.527 ms
 GET /api/v2/act?filter=Expired 304  - 5.853 ms
 GET /api/v2/act?filter=7%20Day,Expired,15%20Day,Normal 200 460 - 25.182 ms
 GET /api/v2/act?filter=7%20Day 200 26 - 6.503 ms
+<<<<<<< HEAD
 GET /api/v2/car-type 404 154 - 6.814 ms
 GET /api/v2/car-type 404 154 - 0.657 ms
 GET /api/v2/car-type 200 16 - 10.714 ms
@@ -10874,3 +10875,5 @@ DELETE /api/v2/act/delete/5ed1250e159fff43ac732472 200 16 - 10.420 ms
 GET /api/v2/act 200 210169 - 5.724 ms
 GET /api/v2/act 304  - 10.846 ms
 GET /api/v2/act/5ed127b8159fff43ac732553 304  - 4.670 ms
+=======
+>>>>>>> d26ffde2e6a9bdbedd33f34a586d22c11153b0b8
