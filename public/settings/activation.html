@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./css/bulma.css" />
+    <style>
+      @font-face {
+        font-family: 'Noto Sans Thai UI';
+        src: url('./font/subset-NotoSansThaiUI-Bold.woff2') format('woff2'),
+          url('./font/subset-NotoSansThaiUI-Bold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Noto Sans Thai UI';
+        src: url('./font/subset-NotoSansThaiUI-Regular.woff2') format('woff2'),
+          url('./font/subset-NotoSansThaiUI-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Noto Sans';
+        src: url('./font/NotoSans-Bold.woff2') format('woff2'),
+          url('./font/NotoSans-Bold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Noto Sans';
+        src: url('./font/NotoSans-Regular.woff2') format('woff2'),
+          url('./font/NotoSans-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      html {
+        background-image: radial-gradient( circle 859px at 7.5% 18%,  rgba(234,6,185,1) 4.2%, rgba(251,179,8,1) 92.7% );
+        overflow: hidden;
+        font-family: 'Noto Sans Thai UI', 'Noto Sans' !important ;
+      }
+
+      body {
+        font-family: 'Noto Sans Thai UI', 'Noto Sans' !important ;
+      }
+
+      .containing {
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+      }
+
+      .closed {
+        background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;
+        font-size:xx-large;
+        color: white;
+        font-style: oblique;
+      }
+
+      .closed:hover {
+        color: black;
+      }
+    </style>
+    <script>
+      const axios = require('axios')
+      const { ipcRenderer, remote } = require('electron')
+      const { getHWID } = require('hwid')
+      const $ = require('jquery')
+
+
+      getHWID().then(id => {
+        $('#hwid').val(id)
+        $('#hwid').prop('disabled', true)
+      })
+
+
+      $(document).ready(function() {
+        $('#submit').click(function() {
+          var Activation = $('#key').val()
+          ipcRenderer.send('activation:keygen', Activation)
+        })
+
+        ipcRenderer.on('activation:keygen:reply', (event, arg) => {
+          if(arg !== 'pass') {
+            new Notification('Activation ไม่สำเร็จ !', {
+              body: 'Activation ไม่สำเร็จ เนื่องจาก Activation Key ผิดพลาด กรุณาติดต่อผู้ดูแลระบบ'
+            })
+          } else {
+            new Notification('Activation สำเร็จ!', {
+              body: 'โปรแกรมสามารถใช้งานได้ตามปกติ'
+            })
+          }
+        })
+        
+        $("#close-button").click(function() {
+          remote.app.quit()
+        })
+      })
+    </script>
+    <title>Activation</title>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: flex-end; margin: 10px;">
+      <button id="close-button" class="closed">×</button>
+    </div>
+    <div class="containing">
+      <div style="margin: 49px">
+        <img src="../icon/key.svg" width="300px" />
+      </div>
+      <div style="margin-top: 19px; margin-right: 46px; color: white;">
+        <div class="title" style="color: white;">
+          Get started with Vehecle Act System
+        </div>
+        <div class="subtitle"  style="color: white;">
+          กรุณาใส่ Activation Code เพื่อปลดล็อกการใช้งานโปรแกรม
+        </div>
+
+        <div class="field">
+          <label class="label"  style="color: white;">Hardware ID</label>
+          <div class="control">
+            <input type="text" id="hwid" class="input" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label"  style="color: white;">Enter Your activation Code</label>
+          <div class="control">
+            <input type="text" id="key" class="input is-primary" />
+          </div>
+        </div>
+        <button id="submit" class="button is-primary is-inverted is-outlined">submit</button>
+      </div>
+    </div>
+  </body>
+</html>

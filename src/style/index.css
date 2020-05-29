@@ -1,0 +1,166 @@
+@import url("./main.css");
+
+body {
+  margin: 0;
+  font-family: "Noto Sans Thai UI", "Noto Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai UI";
+  src: url("../core/font/subset-NotoSansThaiUI-Bold.woff2") format("woff2"),
+    url("../core/font/subset-NotoSansThaiUI-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Noto Sans Thai UI";
+  src: url("../core/font/subset-NotoSansThaiUI-Regular.woff2") format("woff2"),
+    url("../core/font/subset-NotoSansThaiUI-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("../core/font/NotoSans-Bold.woff2") format("woff2"),
+    url("../core/font/NotoSans-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("../core/font/NotoSans-Regular.woff2") format("woff2"),
+    url("../core/font/NotoSans-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ant-form-item {
+  margin-bottom: 5px;
+  padding-right: 10px;
+}
+
+.ant-table-body {
+  max-height: none;
+  overflow-y: scroll;
+  min-height: calc(77vh - 143px);
+}
+
+.ant-table-pagination.ant-pagination {
+  float: right;
+  margin: 16px 20px;
+}
+
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #ffffff;
+  background: -moz-linear-gradient(
+    left,
+    #ffffff 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -webkit-linear-gradient(
+    left,
+    #ffffff 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(
+    left,
+    #ffffff 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  background: linear-gradient(
+    to right,
+    #ffffff 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #ffffff;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+}
+.loader:after {
+  background: #9053c7;
+  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: "";
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.ant-table-placeholder {
+  margin-top: -350px;
+  height: 350px;
+}
+
+.ant-drawer-body {
+  padding: 0px;
+}
+
+.ant-table-placeholder {
+  margin-top: -350px;
+  height: 350px;
+  border: none;
+}
+
+.ant-input[disabled] {
+  color: rgb(0, 0, 0);
+  background-color: #ffffff;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.ant-drawer-body {
+  overflow: hidden;
+}

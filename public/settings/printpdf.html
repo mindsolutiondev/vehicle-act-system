@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    const { ipcRenderer, remote } = require('electron')
+    const printJS = require('print-js')
+    ipcRenderer.send('print:img', true)
+
+    ipcRenderer.on('print:img:reply', (event, img) => {
+      console.log('img')
+      document.getElementById('img').innerHTML = JSON.stringify(img)
+      printJS({printable: img, type: 'image', base64: true, onPrintDialogClose: ipcRenderer.send('print:img:close', true)})
+    })
+  </script>
+</head>
+<body>
+    test
+
+    <p id='img'></p>
+</body>
+</html>

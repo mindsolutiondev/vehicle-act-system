@@ -1,0 +1,38 @@
+export const engine = {
+  engineOil: {
+    latestMileNumber: "-",
+    latestMileNumberDate: "-",
+    nextlatestMileNumber: "-",
+    typeOil: "-",
+    quantity: "-",
+    remainingDistance: "-",
+    spareParts: [],
+  },
+  gearOil: {
+    latestMileNumber: "-",
+    latestMileNumberDate: "-",
+    nextlatestMileNumber: "-",
+    typeOil: "-",
+    quantity: "-",
+    remainingDistance: "-",
+    spareParts: [],
+  },
+  rearGearOil: {
+    latestMileNumber: "-",
+    latestMileNumberDate: "-",
+    nextlatestMileNumber: "-",
+    typeOil: "-",
+    quantity: "-",
+    remainingDistance: "-",
+    spareParts: [],
+  },
+  greaseWheelOil: {
+    latestMileNumber: "-",
+    latestMileNumberDate: "-",
+    nextlatestMileNumber: "-",
+    typeOil: "-",
+    quantity: "-",
+    remainingDistance: "-",
+    spareParts: [],
+  },
+}
