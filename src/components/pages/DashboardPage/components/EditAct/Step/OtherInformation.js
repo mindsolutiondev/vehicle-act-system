@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react"
-import _get from "lodash/get"
-import Footer from "../../../../../elements/Footer"
-import Wheel from "./components/Wheel"
 import { Divider, Input, notification } from "antd"
+import React, { useContext, useState } from "react"
+
 import ActService from "../../../../../../model/act"
-import Loading from "../../../../../elements/Loading"
 import { DeleteContext } from "../../../../../../constants/context"
+import Footer from "../../../../../elements/Footer"
+import Loading from "../../../../../elements/Loading"
+import Wheel from "./components/Wheel"
+import _get from "lodash/get"
 import useGetOneVehicle from "../../../hooks/useGetOneVehicle"
 
 const OtherInformation = ({ closeModal, setStep, actid, toPrevStep }) => {
@@ -29,8 +30,8 @@ const OtherInformation = ({ closeModal, setStep, actid, toPrevStep }) => {
       closeModal()
     } catch (err) {
       setLoadings(true)
-      notification.success({
-        message: `เกิดปัญหาในการเพิ่มข้อมูลดังนี้ \n message: ${err.message}`,
+      new Notification("สำเร็จ !", {
+        body: `เกิดปัญหาในการแก้ไขข้อมูลทะเบียนรถดังนี้ \n message: ${err.message}`,
       })
       setLoadings(false)
     }
