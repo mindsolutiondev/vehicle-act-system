@@ -19,10 +19,7 @@ const OtherInformation = ({ closeModal, setStep, actid, toPrevStep }) => {
   const _onSubmit = async (values) => {
     try {
       setLoadings(true)
-      await ActService.updateOtherDetailStepThree(
-        localStorage.getItem("actId"),
-        { details: getText }
-      )
+      await ActService.updateOtherDetailStepThree(actid, { details: getText })
       await context.setRefetch((prev) => !prev)
       new Notification("สำเร็จ !", {
         body: "แก้ไขข้อมูลทะเบียนรถสำเร็จ",

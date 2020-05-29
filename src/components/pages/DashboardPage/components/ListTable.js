@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react"
-import { SearchOutlined } from "@ant-design/icons"
-import { Table, Input, Button } from "antd"
+import { Button, Input, Table } from "antd"
+import React, { useRef, useState } from "react"
+
 import Highlighter from "react-highlight-words"
 import Loadable from "react-loadable"
+import { SearchOutlined } from "@ant-design/icons"
 
 const ListExpanded = Loadable({
   loader: () => import(/* webpackChunkName: "List.Expanded"*/ "./ListExpanded"),
@@ -135,15 +136,6 @@ const ListTable = ({ source, loading, setRefetch }) => {
       dataIndex: "actExpireDate",
       key: "status",
       width: "10%",
-      onFilter: (value, record) => {
-        return record.statusexpired === "Expired"
-          ? record.statusexpired
-          : record.statusexpired
-      },
-      sorter: (a, b) => {
-        return a.statusexpired.length - b.statusexpired.length
-      },
-      sortDirections: ["descend"],
       render: (data) => (
         <div>
           <Status date={data} />

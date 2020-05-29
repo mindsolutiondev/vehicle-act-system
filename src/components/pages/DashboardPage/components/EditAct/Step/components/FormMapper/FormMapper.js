@@ -19,11 +19,11 @@ const FormMapper = (props) => {
     let dataToSend = {
       ...values,
       name,
-      actId: localStorage.getItem("actId"),
+      actId,
       position,
     }
 
-    await ActService.updateActWheel(localStorage.getItem("actId"), dataToSend)
+    await ActService.updateActWheel(actId, dataToSend)
     setRefetch((prev) => !prev)
   }
   return (

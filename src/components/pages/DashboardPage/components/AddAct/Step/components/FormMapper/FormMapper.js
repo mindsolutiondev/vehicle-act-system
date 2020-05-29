@@ -1,8 +1,9 @@
-import React from "react"
-import { Form, Input, Button, Checkbox } from "antd"
-import { Descriptions, Card, DatePicker } from "antd"
-import { CloseOutlined } from "@ant-design/icons"
+import { Button, Checkbox, Form, Input } from "antd"
+import { Card, DatePicker, Descriptions } from "antd"
+
 import ActService from "../../../../../../../../model/act"
+import { CloseOutlined } from "@ant-design/icons"
+import React from "react"
 
 const FormMapper = (props) => {
   const { setOpenForm, name, position } = props
@@ -20,7 +21,7 @@ const FormMapper = (props) => {
     setOpenForm(false)
   }
   return (
-    <Form name="basic" onFinish={onFinish}>
+    <Form name="basic" onFinish={onFinish} style={{ margin: "1.5rem" }}>
       <Descriptions bordered>
         <Descriptions.Item label="S/N">
           {" "}

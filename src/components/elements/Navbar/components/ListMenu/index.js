@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import PopoverMenu from "./components/PopoverMenu"
-import Modal from "../../../Modals"
+
 import AddActType from "../AddActType"
+import Modal from "../../../Modals"
+import PopoverMenu from "./components/PopoverMenu"
 import { withRouter } from "react-router-dom"
 
 const ListMenu = (props) => {
@@ -9,7 +10,6 @@ const ListMenu = (props) => {
 
   const _showModal = () => {
     setShowModal(true)
-    props.setPopOver(false)
   }
 
   const _handleOk = () => {

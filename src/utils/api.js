@@ -2,7 +2,7 @@ import axios from "axios"
 
 const createApiInstance = () => {
   return axios.create({
-    baseURL: "http://localhost:8021",
+    baseURL: "http://localhost:8020",
     headers: {
       Authorization: `bearer ${localStorage.getItem("access-token")}`,
     },

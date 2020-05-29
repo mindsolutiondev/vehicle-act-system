@@ -160,3 +160,7 @@ body {
   cursor: not-allowed;
   opacity: 1;
 }
+
+.ant-drawer-body {
+  overflow: hidden;
+}

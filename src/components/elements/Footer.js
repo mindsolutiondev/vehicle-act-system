@@ -1,5 +1,12 @@
-import React from "react"
 import { Button } from "antd"
+import React from "react"
+import styled from "styled-components"
+
+const FooterStyled = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+`
 
 const Footer = ({
   handleSubmit,
@@ -11,8 +18,9 @@ const Footer = ({
   const disabledBtn =
     !!onClickCancel || !!handleSubmit ? {} : { disabled: true }
   return (
-    <>
+    <FooterStyled>
       <Button
+        type="link"
         onClick={onClickCancel}
         style={{ marginRight: "10px" }}
         {...disabledBtn}
@@ -25,11 +33,12 @@ const Footer = ({
         htmlType="submit"
         type="submit"
         mini="true"
+        type="primary"
         {...disabledBtn}
       >
         {okText}
       </Button>
-    </>
+    </FooterStyled>
   )
 }
 

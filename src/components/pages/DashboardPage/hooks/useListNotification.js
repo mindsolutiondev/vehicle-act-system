@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react"
 
 import ActService from "../../../../model/act"
-import _get from "lodash/get"
+import _get from "lodash.get"
 
-const useGetVehicle = () => {
-  const [filter, setFilter] = useState([])
-  const [refetch, setRefetch] = useState(false)
-  const [getVehicle, setGetVehicle] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const fetchVehicle = async () => {
-    setLoading(true)
+const useListNotification = () => {
+  let [service, setService] = useState([])
+  let [loading, setLoading] = useState(false)
+  let [refetch, setRefetch] = useState(false)
+  let [filter, setFilter] = useState([])
+  const fetchNotification = async () => {
     try {
-      let vehicle = await ActService.getVehicle(filter)
-      setGetVehicle(_get(vehicle, "data.data"))
+      setLoading(true)
+      let service = await ActService.getNotification(filter)
+      let actService = _get(service, "data.data")
       setLoading(false)
+      setService(actService)
     } catch (err) {
       new Notification("แจ้งเตือน !", {
         body:
@@ -23,15 +23,15 @@ const useGetVehicle = () => {
     }
   }
   useEffect(() => {
-    fetchVehicle()
+    fetchNotification()
   }, [refetch, filter])
 
   return {
-    getVehicle,
-    setRefetch,
+    service,
     loading,
+    setRefetch,
     setFilter,
   }
 }
 
-export default useGetVehicle
+export default useListNotification
