@@ -98,7 +98,7 @@ const DashboardPage = () => {
       okType: "danger",
       cancelText: "No",
       async onOk() {
-        let data = await ActService.delAct(localStorage.getItem("actId"))
+        await ActService.delAct(localStorage.getItem("actId"))
         setShowModal(false)
         setStep(0)
       },

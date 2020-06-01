@@ -15549,3 +15549,11 @@ GET /api/management/datanotifications?filter=15%20Day,Expired 200 153500 - 218.9
 GET /api/management/datanotifications?filter=15%20Day 304  - 218.557 ms
 GET /api/management/datanotifications?filter=15%20Day,7%20Day 200 253 - 269.326 ms
 GET /api/management/datanotifications?filter=15%20Day,7%20Day 304  - 202.327 ms
+POST /api/management/chkaccount 200 313 - 19.030 ms
+GET /api/v2/act 304  - 505.280 ms
+GET /api/management/ActNoti/ 304  - 1151.656 ms
+GET /api/v2/act?filter=7%20Day 304  - 171.558 ms
+GET /api/v2/act 304  - 215.346 ms
+GET /api/management/acttype 200 2138 - 8.119 ms
+GET /api/management/ActNoti/ 304  - 473.404 ms
+GET /api/v2/act 304  - 724.773 ms
