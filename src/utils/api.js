@@ -2,7 +2,7 @@ import axios from "axios"
 
 const createApiInstance = () => {
   return axios.create({
-    baseURL: "http://localhost:8020",
+    baseURL: "http://api.topspin.space/vehicle-api",
     headers: {
       Authorization: `bearer ${localStorage.getItem("access-token")}`,
     },

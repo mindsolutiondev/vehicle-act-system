@@ -39,11 +39,14 @@ const BasicInformation = (props) => {
 
   const renderTypeVehecal = () => {
     const getCar = getCarType !== false ? getCarType : []
-    return getCar.map((val, index) => (
-      <Option value={val.nameActType} key={index}>
-        {val.nameActType}
-      </Option>
-    ))
+    return (
+      getCar &&
+      getCar.map((val, index) => (
+        <Option value={val.nameActType} key={index}>
+          {val.nameActType}
+        </Option>
+      ))
+    )
   }
 
   const _onUpload = async (name, file) => {

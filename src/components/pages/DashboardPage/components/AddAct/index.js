@@ -7,6 +7,7 @@ import OtherInformation from "./Step/OtherInformation"
 import { StepContext } from "../../../../../constants/context"
 import { Steps } from "antd"
 import useGetCarType from "../../hooks/useGetCarType"
+import ErrorBoundary from "../../../../../core/ErrorBoundary"
 
 const { Step } = Steps
 
@@ -62,12 +63,12 @@ const AddAct = (props) => {
   const stepList = stepArr.map((st) => <Step key={st} title={st} />)
 
   return (
-    <div>
+    <ErrorBoundary>
       <>
         <Steps current={step}>{stepList}</Steps>
         {renderStep[step]}
       </>
-    </div>
+    </ErrorBoundary>
   )
 }
 
