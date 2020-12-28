@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN yarn cache clean && yarn --update-checksums
 COPY . ./
-RUN yarn && yarn build
+RUN yarn && yarn build:production
 
 # Stage - Production
 FROM nginx:1.17-alpine

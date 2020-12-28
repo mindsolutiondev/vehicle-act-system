@@ -23,6 +23,7 @@
     "electron-is-dev": "^1.1.0",
     "electron-log": "^3.0.9",
     "electron-updater": "^4.2.0",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "formik": "^2.1.4",
     "formik-antd": "^2.0.1",
@@ -72,6 +73,7 @@
   "scripts": {
     "start": "npm run watch:css && react-app-rewired start",
     "build": "npm run build:css && react-app-rewired build",
+    "build:production": "env-cmd -f production.env npm run build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "electron-dev": "set BROWSER=none && set ELECTRON_DISABLE_SECURITY_WARNINGS=true && set ELECTRON_START_URL=http://localhost:3000 && electron .",
