@@ -47,4 +47,4 @@ jobs:
             docker stop $(docker ps -aqf "ancestor=docker.pkg.github.com/mindsolutiondev/vehicle-act-system/vehicle-act-system:latest")
             docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
             docker pull docker.pkg.github.com/mindsolutiondev/vehicle-act-system/vehicle-act-system:latest
-            docker run -dit -p 4000:80 docker.pkg.github.com/mindsolutiondev/vehicle-act-system/vehicle-act-system:latest
+            docker run -dit -p 4001:80 docker.pkg.github.com/mindsolutiondev/vehicle-act-system/vehicle-act-system:latest
