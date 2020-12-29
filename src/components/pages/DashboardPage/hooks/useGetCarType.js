@@ -4,13 +4,14 @@ import ActService from "../../../../model/act"
 import _get from "lodash/get"
 
 const useGetCarType = () => {
-  const [getCarType, setCarType] = useState(false)
+  const [getCarType, setCarType] = useState([])
   const [loadingCarType, setLoadingCarType] = useState(false)
 
   const fetchCarType = async () => {
     setLoadingCarType(true)
     try {
       let vehicle = await ActService.getCarType()
+      console.log(vehicle)
       setCarType(_get(vehicle, "data.data"))
       setLoadingCarType(false)
     } catch (err) {

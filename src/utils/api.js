@@ -1,8 +1,14 @@
 import axios from "axios"
 
+console.log(
+  process.env.REACT_APP_ENV !== "production"
+    ? process.env.REACT_APP_API_LOCAL
+    : process.env.REACT_APP_API_PRODUCTION,
+  process.env
+)
 const createApiInstance = () => {
   return axios.create({
-    baseURL: "http://api.topspin.space/vehicle-api",
+    baseURL: process.env.REACT_APP_API,
     headers: {
       Authorization: `bearer ${localStorage.getItem("access-token")}`,
     },

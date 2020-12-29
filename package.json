@@ -72,6 +72,7 @@
   },
   "scripts": {
     "start": "npm run watch:css && react-app-rewired start",
+    "dev:web": "env-cmd -f .env npm start",
     "build": "npm run build:css && react-app-rewired build",
     "build:production": "env-cmd -f production.env npm run build",
     "test": "react-app-rewired test",

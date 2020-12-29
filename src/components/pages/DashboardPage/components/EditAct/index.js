@@ -7,6 +7,7 @@ import OtherInformation from "./Step/OtherInformation"
 
 import Loadable from "react-loadable"
 import { DeleteContext } from "../../../../../constants/context"
+import useGetCarType from "../../hooks/useGetCarType"
 
 const { Step } = Steps
 
@@ -27,6 +28,7 @@ const Loading = Loadable({
 const EditAct = (props) => {
   const { closeModal, setRefetch, actid } = props
   const { step, setStep } = useContext(DeleteContext)
+  let { getCarType, loadingCarType } = useGetCarType()
 
   const toNextStep = () => {
     setStep((s) => s + 1)
@@ -44,6 +46,8 @@ const EditAct = (props) => {
     Upload,
     setStep,
     setRefetch,
+    getCarType,
+    loadingCarType,
   }
 
   const stepArr = ["ข้อมูลทั่วไป", "ข้อมูลตัวรถ", "ข้อมูลอื่นๆ"]

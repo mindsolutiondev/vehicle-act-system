@@ -39,11 +39,12 @@ const BasicInformation = (props) => {
 
   const renderTypeVehecal = () => {
     const getCar = getCarType !== false ? getCarType : []
+    console.log(getCarType)
     return (
       getCar &&
       getCar.map((val, index) => (
-        <Option value={val.nameActType} key={index}>
-          {val.nameActType}
+        <Option value={val.name} key={index}>
+          {val.name}
         </Option>
       ))
     )

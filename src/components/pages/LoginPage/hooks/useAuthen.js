@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
+import { notification } from "antd"
 import AuthService from "../../../../model/auth"
 
 const useAuthen = () => {
@@ -38,22 +39,25 @@ const useAuthen = () => {
           )
           history.push("/dashboard")
 
-          new Notification("เข้าสู่ระบบสำเร็จ !", {
-            body: "เข้าสู่ระบบสำเร็จ",
+          notification.success({
+            message: "เข้าสู่ระบบสำเร็จ",
           })
+
           setLoading(false)
         }
       } else {
         setLoading(false)
-        new Notification("ผิดพลาด !", {
-          body: "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่อีกครั้ง",
+        notification.error({
+          message:
+            "เข้าสู่ระบบไม่สำเร็จ เนื่องจาก ชื่อผู้ใช้งานหรือรหัสผ่านมีปัญหา",
         })
         localStorage.clear()
       }
     } catch (error) {
       setLoading(false)
-      new Notification("แจ้งเตือน !", {
-        body: "ระบบมีปัญหา กรุณาติดต่อผู้ดูแลระบบเพื่อแก้ไขปัญหาที่เกิดขึ้น",
+      notification.error({
+        message:
+          "เกิดปัญหาขึ้นกับระบบเครือข่าย กรุณาติดต่อผู้ดูแลระบบเพื่อแจ้งปัญหาที่เกิดขึ้น",
       })
       localStorage.clear()
     }

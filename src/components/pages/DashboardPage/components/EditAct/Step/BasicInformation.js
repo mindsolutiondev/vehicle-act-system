@@ -5,14 +5,12 @@ import ActService from "../../../../../../model/act"
 import Footer from "../../../../../elements/Footer"
 import _get from "lodash.get"
 import getDateFormat from "../../../../../../utils/getDateFormat"
-import moment from "moment"
-import { typecar } from "../../../../../../constants/typecar"
 import useGetOneVehicle from "../../../hooks/useGetOneVehicle"
 
 const { Option } = Select
 
 const BasicInformation = (props) => {
-  const { toNextStep, Upload, actid } = props
+  const { toNextStep, Upload, actid, getCarType, loadingCarType } = props
   const [form] = Form.useForm()
   let { show, loading } = useGetOneVehicle({ actId: actid, step: 1 })
 
@@ -56,14 +54,18 @@ const BasicInformation = (props) => {
     }
   }
 
-  const renderTypeVehecal = (data) => {
-    return data.typecar.map((val, index) => (
-      <Option value={val} key={index}>
-        {val}
-      </Option>
-    ))
+  const renderTypeVehecal = () => {
+    const getCar = getCarType !== false ? getCarType : []
+    console.log(getCarType)
+    return (
+      getCar &&
+      getCar.map((val, index) => (
+        <Option value={val.name} key={index}>
+          {val.name}
+        </Option>
+      ))
+    )
   }
-
   const _onUpload = async (name, file) => {
     try {
       await ActService.uploadImages(actid, { [name]: file })
@@ -101,7 +103,7 @@ const BasicInformation = (props) => {
                 rules={[{ required: true, message: "กรุณาเลือกประเภทรถ" }]}
               >
                 <Select placeholder="กรุณาเลือกประเภทรถ">
-                  {renderTypeVehecal(typecar)}
+                  {renderTypeVehecal()}
                 </Select>
               </Form.Item>
             </Col>
