@@ -1,5 +1,11 @@
 import React, { Fragment } from "react"
-import { Switch, Route, HashRouter, Redirect } from "react-router-dom"
+import {
+  Switch,
+  Route,
+  HashRouter,
+  Redirect,
+  BrowserRouter,
+} from "react-router-dom"
 import Loadable from "react-loadable"
 
 const Login = Loadable({
@@ -26,16 +32,16 @@ const PrivateRoute = Loadable({
 })
 
 const Routes = () => (
-  <HashRouter basename="/">
+  <BrowserRouter basename="/">
     <Switch>
       <Route exact path="/" component={Login} />
       <Fragment>
         <PrivateRoute path="/dashboard" component={Dashboard} />
       </Fragment>
 
-      <Route render={() => <Redirect to="/"/>}/>
+      <Route render={() => <Redirect to="/" />} />
     </Switch>
-  </HashRouter>
+  </BrowserRouter>
 )
 
 export default Routes
